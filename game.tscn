@@ -1,4 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://d0gcxviulxr6x"]
+[gd_scene load_steps=11 format=3 uid="uid://d0gcxviulxr6x"]
+
+[ext_resource type="Script" path="res://game.gd" id="1_8dcpx"]
+[ext_resource type="Script" path="res://player.gd" id="2_jg7bb"]
+[ext_resource type="Script" path="res://ai_player.gd" id="3_6rpub"]
+[ext_resource type="Script" path="res://ball.gd" id="3_ja7w4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8ch4n"]
 size = Vector2(20, 120)
@@ -18,7 +23,8 @@ size = Vector2(41, 804)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_on8qj"]
 size = Vector2(41, 807)
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Sprite2D"]
+script = ExtResource("1_8dcpx")
 
 [node name="BG" type="ColorRect" parent="."]
 offset_right = 1000.0
@@ -31,14 +37,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 490.0
-offset_right = 510.0
-offset_bottom = 800.0
+offset_left = 490.5
+offset_top = -0.5
+offset_right = 510.5
+offset_bottom = 800.5
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Player" type="StaticBody2D" parent="."]
 position = Vector2(30, 350)
+script = ExtResource("2_jg7bb")
 
 [node name="ColorRect" type="ColorRect" parent="Player"]
 anchors_preset = 4
@@ -53,9 +61,27 @@ grow_vertical = 2
 position = Vector2(10, 0)
 shape = SubResource("RectangleShape2D_8ch4n")
 
+[node name="AI Player" type="StaticBody2D" parent="."]
+position = Vector2(950, 350)
+script = ExtResource("3_6rpub")
+
+[node name="ColorRect" type="ColorRect" parent="AI Player"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -60.0
+offset_right = 20.0
+offset_bottom = 60.0
+grow_vertical = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AI Player"]
+position = Vector2(10, 0)
+shape = SubResource("RectangleShape2D_8ch4n")
+
 [node name="Ball" type="CharacterBody2D" parent="."]
 position = Vector2(500, 444)
 collision_mask = 3
+script = ExtResource("3_ja7w4")
 
 [node name="ColorRect" type="ColorRect" parent="Ball"]
 anchors_preset = 8
@@ -118,3 +144,11 @@ theme_override_font_sizes/font_size = 32
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="ScoreLeft" to="." method="_on_score_left_body_entered"]
+[connection signal="body_entered" from="ScoreRight" to="." method="_on_score_right_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
