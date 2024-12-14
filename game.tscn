@@ -149,6 +149,47 @@ vertical_alignment = 1
 one_shot = true
 autostart = true
 
+[node name="Multiplayer_HUD" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = 80.0
+offset_top = 80.0
+offset_right = 80.0
+offset_bottom = 80.0
+
+[node name="Panel" type="Panel" parent="Multiplayer_HUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Multiplayer_HUD/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HostGame" type="Button" parent="Multiplayer_HUD/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Host Game"
+
+[node name="JoinAsPlayer2" type="Button" parent="Multiplayer_HUD/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Join as Player 2"
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://multiplayer_player.tscn")
+spawn_path = NodePath("../players")
+spawn_limit = 1
+
+[node name="players" type="Node2D" parent="."]
+
 [connection signal="body_entered" from="ScoreLeft" to="." method="_on_score_left_body_entered"]
 [connection signal="body_entered" from="ScoreRight" to="." method="_on_score_right_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="Multiplayer_HUD/Panel/VBoxContainer/HostGame" to="." method="_on_host_game_pressed"]
+[connection signal="pressed" from="Multiplayer_HUD/Panel/VBoxContainer/JoinAsPlayer2" to="." method="_on_join_as_player_2_pressed"]

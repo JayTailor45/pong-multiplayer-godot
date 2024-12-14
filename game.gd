@@ -28,3 +28,13 @@ func _on_score_right_body_entered(body: Node2D) -> void:
 	score[0] += 1
 	$HUD/PlayerScore.text = str(score[0])
 	$Timer.start()
+
+
+func _on_host_game_pressed():
+	MultiplayerManager.become_host()
+	%Multiplayer_HUD.hide()
+
+
+func _on_join_as_player_2_pressed():
+	MultiplayerManager.join_as_player_2()
+	%Multiplayer_HUD.hide()
