@@ -1,32 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://dww23j75l47dg"]
+[gd_scene load_steps=5 format=3 uid="uid://dww23j75l47dg"]
 
 [ext_resource type="Script" path="res://multiplayer_player_controller.gd" id="1_xdew6"]
 [ext_resource type="Script" path="res://input_synchronizer.gd" id="2_qimsy"]
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_58g5p"]
-properties/0/path = NodePath(".:player_id")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath(".:position")
-properties/1/spawn = true
-properties/1/replication_mode = 1
-
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_gcm12"]
-properties/0/path = NodePath("InputSynchronizer:is_up_key_pressed")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath("InputSynchronizer:is_down_key_pressed")
-properties/1/spawn = true
-properties/1/replication_mode = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_unc0n"]
 size = Vector2(20, 120)
 
 [node name="MultiplayerPlayer" type="StaticBody2D"]
 script = ExtResource("1_xdew6")
-
-[node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_58g5p")
+player_id = null
 
 [node name="InputSynchronizer" type="MultiplayerSynchronizer" parent="."]
 unique_name_in_owner = true

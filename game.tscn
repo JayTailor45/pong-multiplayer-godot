@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://d0gcxviulxr6x"]
+[gd_scene load_steps=10 format=3 uid="uid://d0gcxviulxr6x"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_8dcpx"]
 [ext_resource type="Script" path="res://player.gd" id="2_jg7bb"]
-[ext_resource type="Script" path="res://ai_player.gd" id="3_6rpub"]
 [ext_resource type="Script" path="res://ball.gd" id="3_ja7w4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8ch4n"]
@@ -58,23 +57,6 @@ offset_bottom = 60.0
 grow_vertical = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(10, 0)
-shape = SubResource("RectangleShape2D_8ch4n")
-
-[node name="AI Player" type="StaticBody2D" parent="."]
-position = Vector2(950, 350)
-script = ExtResource("3_6rpub")
-
-[node name="ColorRect" type="ColorRect" parent="AI Player"]
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -60.0
-offset_right = 20.0
-offset_bottom = 60.0
-grow_vertical = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AI Player"]
 position = Vector2(10, 0)
 shape = SubResource("RectangleShape2D_8ch4n")
 
